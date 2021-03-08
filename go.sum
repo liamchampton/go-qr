@@ -1,0 +1,6 @@
+github.com/divan/qrlogo v1.0.2 h1:2DuF0QOXqmuBOmmQH+++yay6Yind90x2CncyeW9Pld0=
+github.com/divan/qrlogo v1.0.2/go.mod h1:CnnR3G9IuGcAszQwNPYFjeE3VsArPghQVi6L5lQykSg=
+github.com/gorilla/mux v1.8.0 h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI=
+github.com/gorilla/mux v1.8.0/go.mod h1:DVbg23sWSpFRCP0SfiEN6jmj59UnW/n46BH5rLB71So=
+github.com/skip2/go-qrcode v0.0.0-20191027152451-9434209cb086 h1:RYiqpb2ii2Z6J4x0wxK46kvPBbFuZcdhS+CIztmYgZs=
+github.com/skip2/go-qrcode v0.0.0-20191027152451-9434209cb086/go.mod h1:PLPIyL7ikehBD1OAjmKKiOEhbvWyHGaNDjquXMcYABo=
