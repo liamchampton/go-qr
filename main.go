@@ -25,7 +25,7 @@ const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 var seededRand *rand.Rand = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 func main() {
-	gracefulTerminateSystem()
+	gracefulShutdown()
 
 	var dir string = "html"
 	r := mux.NewRouter()
@@ -42,7 +42,7 @@ func main() {
 	}
 
 	currentTime := time.Now()
-	fmt.Println("QR Code Generator server is started...", currentTime.Format("Mon 02 Jan 2006 03:04pm"))
+	fmt.Println("QR Code Generator server is started on port :8080...", currentTime.Format("Mon 02 Jan 2006 03:04pm"))
 	log.Fatal(srv.ListenAndServe())
 }
 
@@ -72,10 +72,10 @@ func createQrCode(w http.ResponseWriter, r *http.Request) {
 
 	img, _, _ := image.Decode(bytes.NewReader(imgBytes))
 
-	fname := RandomString(16, charset)
+	filename := RandomString(16, charset)
 	currentDir, _ := os.Getwd()
-	logoFile := currentDir + "/html/uploaded_logos/" + fname + ".png"
-	qrCodeFile := currentDir + "/html/qr_codes/" + fname + ".png"
+	logoFile := currentDir + "/html/uploaded_logos/" + filename + ".png"
+	qrCodeFile := currentDir + "/html/qr_codes/" + filename + ".png"
 	imgFile, err := os.Create(logoFile)
 	if err != nil {
 		panic(err)
@@ -97,9 +97,9 @@ func createQrCode(w http.ResponseWriter, r *http.Request) {
 	out.Write(qr.Bytes())
 	out.Close()
 
-	writeResponse(w, http.StatusCreated, map[string]string{"fname": fname + ".png"})
+	writeResponse(w, http.StatusCreated, map[string]string{"fname": filename + ".png"})
 
-	fmt.Println("QR image generated: ", fname+".png")
+	fmt.Println("QR image generated: ", filename+".png")
 }
 
 func RandomString(length int, charset string) string {
@@ -125,7 +125,7 @@ func errcheck(err error, str string) {
 		os.Exit(1)
 	}
 }
-func gracefulTerminateSystem() {
+func gracefulShutdown() {
 	c := make(chan os.Signal, 2)
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 	go func() {
