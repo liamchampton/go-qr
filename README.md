@@ -1,4 +1,4 @@
-# go-qr
+# qr-code-generator
 repository to create your own qr code in Go
 
 ## Running with source code
