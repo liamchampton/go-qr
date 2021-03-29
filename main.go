@@ -72,7 +72,7 @@ func createQrCode(w http.ResponseWriter, r *http.Request) {
 
 	img, _, _ := image.Decode(bytes.NewReader(imgBytes))
 
-	fname := RandomString(16)
+	fname := RandomString(16, charset)
 	currentDir, _ := os.Getwd()
 	logoFile := currentDir + "/html/uploaded_logos/" + fname + ".png"
 	qrCodeFile := currentDir + "/html/qr_codes/" + fname + ".png"
@@ -102,16 +102,12 @@ func createQrCode(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("QR image generated: ", fname+".png")
 }
 
-func StringWithCharset(length int, charset string) string {
+func RandomString(length int, charset string) string {
 	b := make([]byte, length)
 	for i := range b {
 		b[i] = charset[seededRand.Intn(len(charset))]
 	}
 	return string(b)
-}
-
-func RandomString(length int) string {
-	return StringWithCharset(length, charset)
 }
 
 func writeResponse(w http.ResponseWriter, code int, message map[string]string) {
